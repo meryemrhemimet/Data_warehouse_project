@@ -55,29 +55,29 @@ Objective: Write SQL-based analytics that surface actionable insight across thre
 
 The goal isn't just clean data — it's clean data that answers real business questions.
 
-📂 Repository Structure
-sql-data-warehouse-project/
+data-warehouse-project/
 │
-├── datasets/                    # Raw source data (CRM & ERP CSV exports)
+├── datasets/                           # Raw datasets used for the project (ERP and CRM data)
 │
-├── docs/                        # Architecture diagrams & documentation
-│   ├── data_architecture.drawio     # Overall warehouse architecture
-│   ├── data_flow.drawio             # End-to-end data flow diagram
-│   ├── data_models.drawio           # Star schema / data model diagram
-│   ├── etl.drawio                   # ETL methods & techniques used
-│   ├── data_catalog.md              # Field-level dataset documentation
-│   └── naming-conventions.md        # Naming standards for tables, columns, files
+├── docs/                               # Project documentation and architecture details
+│   ├── etl.drawio                      # Draw.io file shows all different techniquies and methods of ETL
+│   ├── data_architecture.drawio        # Draw.io file shows the project's architecture
+│   ├── data_catalog.md                 # Catalog of datasets, including field descriptions and metadata
+│   ├── data_flow.drawio                # Draw.io file for the data flow diagram
+│   ├── data_models.drawio              # Draw.io file for data models (star schema)
+│   ├── naming-conventions.md           # Consistent naming guidelines for tables, columns, and files
 │
-├── scripts/                     # All SQL logic, organized by layer
-│   ├── bronze/                      # Raw ingestion scripts
-│   ├── silver/                      # Cleansing & transformation scripts
-│   └── gold/                        # Star schema / analytical model scripts
+├── scripts/                            # SQL scripts for ETL and transformations
+│   ├── bronze/                         # Scripts for extracting and loading raw data
+│   ├── silver/                         # Scripts for cleaning and transforming data
+│   ├── gold/                           # Scripts for creating analytical models
 │
-├── tests/                       # Data quality & validation scripts
+├── tests/                              # Test scripts and quality files
 │
-├── README.md                    # You are here
-├── LICENSE                      # Project license
-└── .gitignore
+├── README.md                           # Project overview and instructions
+├── LICENSE                             # License information for the repository
+├── .gitignore                          # Files and directories to be ignored by Git
+└── requirements.txt                    # Dependencies and requirements for the project
 # Tools Used
 SQL Server Express	Lightweight, free database engine to host the warehouse
 SSMS	GUI for writing, running, and managing SQL scripts
