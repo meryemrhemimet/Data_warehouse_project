@@ -1,12 +1,14 @@
 # Data_warehouse_project
-#About This Project
-This project is a full, hands-on build of a modern data warehouse using SQL Server — designed to show, end-to-end, how raw operational data becomes trustworthy, query-ready analytics.
+Welcome! This is my end-to-end SQL Server data warehouse project — raw data in, clean insights out. Explore the architecture, the pipelines, and the SQL behind it all.
+
+# About This Project
+This project is a full, hands-on build of a modern data warehouse using SQL Server designed to showv how raw operational data becomes trustworthy, query-ready analytics.
 
 It simulates a real business scenario: two independent source systems — a CRM and an ERP — each exporting their own CSV files, with their own quirks, inconsistencies, and gaps. The job of this project is to take that raw, disconnected data and turn it into a single, unified model that analysts and stakeholders can actually query with confidence.
 
 It's built as a portfolio-grade demonstration of core data engineering skills: architecture design, ETL development, data modeling, data quality testing, and SQL-based analytics.
 
-🏛️ The Architecture: Medallion (Bronze → Silver → Gold)
+# The Architecture: Medallion (Bronze → Silver → Gold)
 <img width="1402" height="807" alt="Diagramme sans nom drawio (6)" src="https://github.com/user-attachments/assets/e329f9cc-7024-4e88-bba1-c501e71f8f55" />
 
 
@@ -19,7 +21,7 @@ Layer	Purpose	What Happens Here
 
 Each layer has one clear job. Nothing gets modeled before it's clean, and nothing gets cleaned before it's safely landed — a strict, predictable flow from raw file to business insight.
 
-🎯 What This Project Covers
+# What This Project Covers
 Data Architecture — designing a layered warehouse from the ground up
 ETL Development — building pipelines that extract, transform, and load data between layers
 Data Modeling — designing fact and dimension tables around a star schema
@@ -28,7 +30,7 @@ SQL Analytics — writing queries that turn the final model into real business i
 
 Together, these cover the full skill set of a modern data engineer / analytics engineer working with SQL Server.
 
-📌 Project Requirements
+# Project Requirements
 1. Data Engineering — Building the Warehouse
 
 Objective: Consolidate sales data from two source systems into a single warehouse that supports reliable analytical reporting.
@@ -73,14 +75,11 @@ sql-data-warehouse-project/
 ├── README.md                    # You are here
 ├── LICENSE                      # Project license
 └── .gitignore
-🛠️ Tools Used
-Tool	Purpose
+# Tools Used
 SQL Server Express	Lightweight, free database engine to host the warehouse
 SSMS	GUI for writing, running, and managing SQL scripts
 Draw.io	Diagramming the architecture, data flow, and data model
 Git & GitHub	Version control and project hosting
-
-Everything used in this project is free and accessible — no paid tools required to follow along or rebuild it.
 
 ⚙️ How It Works, End to End
 Bronze: Raw CRM/ERP CSVs → loaded as-is into staging tables
