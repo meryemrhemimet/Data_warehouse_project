@@ -54,7 +54,7 @@ Objective: Write SQL-based analytics that surface actionable insight across thre
 📈 Sales Trends
 
 The goal isn't just clean data — it's clean data that answers real business questions.
-
+## 📂 **Repository Structure**
 data-warehouse-project/
 │
 ├── datasets/                           # Raw datasets used for the project (ERP and CRM data)
