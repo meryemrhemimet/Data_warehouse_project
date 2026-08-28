@@ -15,8 +15,11 @@ It's built as a portfolio-grade demonstration of core data engineering skills: a
 This warehouse is structured around the Medallion Architecture, a layered design pattern where data quality and usability improve at every stage:
 
 Layer	Purpose	What Happens Here
+
 🟫 Bronze	Raw ingestion	Source CSVs are loaded exactly as-is into SQL Server — no transformations, no assumptions. This preserves a faithful, traceable copy of the original data.
+
 ⬜ Silver	Cleansing & standardization	Data is deduplicated, retyped, standardized, and validated. Inconsistent codes, formats, and null values are resolved here — this is where messy data becomes trustworthy data.
+
 🟨 Gold	Business-ready modeling	Cleaned data is reshaped into a star schema — fact and dimension tables designed specifically for fast, intuitive reporting and analytics.
 
 Each layer has one clear job. Nothing gets modeled before it's clean, and nothing gets cleaned before it's safely landed — a strict, predictable flow from raw file to business insight.
