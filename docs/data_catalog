@@ -1,79 +1,55 @@
-# 📖 Data Catalog — Gold Layer
+# Gold Layer — Data Catalog
 
-> A field-by-field reference for every table in the Gold layer — what it contains, where it comes from, and how to read it.
+## Overview
 
-## 🧭 Overview
+The **Gold Layer** represents the business-level data model of the data warehouse.  
+It is designed to support **analytics, reporting, and business intelligence** use cases.
 
-The **Gold Layer** is the business-facing layer of the warehouse — the one analysts and reports actually query. It's organized as a **star schema**: two dimension tables (👤 *who*, 📦 *what*) connected to one fact table (💰 *what happened*).
+The Gold Layer follows a **Star Schema** approach and consists of:
 
-| Table | Type | Description |
+- **Dimension tables** — descriptive information used to analyze business entities.
+- **Fact tables** — measurable transactional data used to calculate business metrics.
+
+### Gold Layer Objects
+
+| Object | Type | Description |
 |---|---|---|
-| `gold.dim_customers` | 👤 Dimension | Who the customer is |
-| `gold.dim_products` | 📦 Dimension | What the product is |
-| `gold.fact_sales` | 💰 Fact | What was sold, when, and for how much |
+| `gold.dim_customers` | Dimension | Customer information enriched with demographic and geographic data |
+| `gold.dim_products` | Dimension | Product information and classification attributes |
+| `gold.fact_sales` | Fact | Transactional sales data used for analytical reporting |
 
 ---
 
-## 👤 1. `gold.dim_customers`
+# 1. `gold.dim_customers`
 
-**Purpose:** Customer details enriched with demographic and geographic data.
+## Purpose
 
-| Column | Type | Description |
+The `gold.dim_customers` view stores customer information enriched with **demographic and geographic attributes**.
+
+It serves as the main **Customer Dimension** in the Gold Layer and is used to analyze sales and customer behavior.
+
+## Columns
+
+| Column | Data Type | Description |
 |---|---|---|
-| 🔑 `customer_key` | `INT` | Surrogate key uniquely identifying each customer record. |
-| `customer_id` | `INT` | Unique numerical identifier assigned to each customer. |
-| `customer_number` | `NVARCHAR(50)` | Alphanumeric identifier used for tracking and referencing the customer. |
+| `customer_key` | `INT` | Surrogate key uniquely identifying each customer record in the dimension. |
+| `customer_id` | `INT` | Unique numerical identifier assigned to the customer. |
+| `customer_number` | `NVARCHAR(50)` | Alphanumeric customer identifier used for tracking and referencing. |
 | `first_name` | `NVARCHAR(50)` | Customer's first name. |
-| `last_name` | `NVARCHAR(50)` | Customer's last name / family name. |
-| `country` | `NVARCHAR(50)` | Customer's country of residence (e.g., `'Australia'`). |
-| `marital_status` | `NVARCHAR(50)` | Marital status (e.g., `'Married'`, `'Single'`). |
-| `gender` | `NVARCHAR(50)` | Gender (e.g., `'Male'`, `'Female'`, `'n/a'`). |
-| 📅 `birthdate` | `DATE` | Date of birth, `YYYY-MM-DD` (e.g., `1971-10-06`). |
-| 📅 `create_date` | `DATE` | Date the customer record was created in the system. |
+| `last_name` | `NVARCHAR(50)` | Customer's last name or family name. |
+| `country` | `NVARCHAR(50)` | Customer's country of residence, such as `Australia`. |
+| `marital_status` | `NVARCHAR(50)` | Customer's marital status, such as `Married` or `Single`. |
+| `gender` | `NVARCHAR(50)` | Customer's gender, such as `Male`, `Female`, or `n/a`. |
+| `birthdate` | `DATE` | Customer's date of birth in `YYYY-MM-DD` format. |
+| `create_date` | `DATE` | Date when the customer record was created in the source system. |
 
----
+### Data Sources
 
-## 📦 2. `gold.dim_products`
+The customer dimension combines data from:
 
-**Purpose:** Product attributes and classification details.
-
-| Column | Type | Description |
-|---|---|---|
-| 🔑 `product_key` | `INT` | Surrogate key uniquely identifying each product record. |
-| `product_id` | `INT` | Unique internal identifier for the product. |
-| `product_number` | `NVARCHAR(50)` | Structured alphanumeric product code, used for categorization/inventory. |
-| `product_name` | `NVARCHAR(50)` | Descriptive name — includes type, color, size, etc. |
-| `category_id` | `NVARCHAR(50)` | Identifier linking to the product's high-level category. |
-| `category` | `NVARCHAR(50)` | Broad classification (e.g., `Bikes`, `Components`). |
-| `subcategory` | `NVARCHAR(50)` | More specific classification within the category. |
-| `maintenance_required` | `NVARCHAR(50)` | Whether the product requires maintenance (`'Yes'` / `'No'`). |
-| 💲 `cost` | `INT` | Base cost of the product, in monetary units. |
-| `product_line` | `NVARCHAR(50)` | Product line/series (e.g., `Road`, `Mountain`). |
-| 📅 `start_date` | `DATE` | Date the product became available for sale. |
-
----
-
-## 💰 3. `gold.fact_sales`
-
-**Purpose:** Transactional sales data — the measurable "events" of the warehouse.
-
-| Column | Type | Description |
-|---|---|---|
-| `order_number` | `NVARCHAR(50)` | Unique alphanumeric sales order ID (e.g., `'SO54496'`). |
-| 🔗 `product_key` | `INT` | Foreign key linking to `gold.dim_products`. |
-| 🔗 `customer_key` | `INT` | Foreign key linking to `gold.dim_customers`. |
-| 📅 `order_date` | `DATE` | Date the order was placed. |
-| 📅 `shipping_date` | `DATE` | Date the order was shipped. |
-| 📅 `due_date` | `DATE` | Date payment was due. |
-| 💲 `sales_amount` | `INT` | Total value of the sale line item (e.g., `25`). |
-| `quantity` | `INT` | Units ordered for the line item (e.g., `1`). |
-| 💲 `price` | `INT` | Price per unit for the line item (e.g., `25`). |
-
----
-
-## 🗝️ Legend
-
-- 🔑 Surrogate key (unique row identifier within the Gold layer)
-- 🔗 Foreign key (links a fact row to a dimension)
-- 📅 Date field
-- 💲 Monetary value
+```text
+Silver Layer
+│
+├── silver.crm_cust_info
+├── silver.erp_cust_az12
+└── silver.erp_loc_a101
